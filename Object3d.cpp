@@ -173,6 +173,8 @@ void Object3d::InitializeCamera(int window_width, int window_height)
 	//	XMLoadFloat3(&eye),
 	//	XMLoadFloat3(&target),
 	//	XMLoadFloat3(&up));
+	
+	//ビュー行列の計算
 	UpdateViewMatrix();
 
 	// 平行投影による射影行列の生成
@@ -508,8 +510,7 @@ void Object3d::UpdateViewMatrix()
 
 	XMVECTOR cameraAxisY;
 
-	cameraAxisY = XMVector3Cross(upVector, cameraAxisZ);
-	cameraAxisY = XMVector3Normalize(cameraAxisY);
+	cameraAxisY = XMVector3Cross(cameraAxisZ, cameraAxisX);
 
 	XMMATRIX matCameraRot;
 
@@ -529,13 +530,13 @@ void Object3d::UpdateViewMatrix()
 	XMVECTOR translation = XMVectorSet(tX.m128_f32[0], tY.m128_f32[1], tZ.m128_f32[2], 1.0f);
 
 	matView.r[3] = translation;
-#pragma region
-	//ビルボード行列
-	matBillboard.r[0] = cameraAxisX;
-	matBillboard.r[1] = cameraAxisY;
-	matBillboard.r[2] = cameraAxisZ;
-	matBillboard.r[3] = cameraAxisX;
-#pragma region
+//#pragma region
+//	//ビルボード行列
+//	matBillboard.r[0] = cameraAxisX;
+//	matBillboard.r[1] = cameraAxisY;
+//	matBillboard.r[2] = cameraAxisZ;
+//	matBillboard.r[3] = cameraAxisX;
+//#pragma region
 }
 
 bool Object3d::Initialize()
