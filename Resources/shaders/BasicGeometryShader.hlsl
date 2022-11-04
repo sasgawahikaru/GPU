@@ -4,29 +4,41 @@
 //	float4 pos : SV_POSITION;
 //};
 
-[maxvertexcount(3)]
+static const uint vnum = 4;
+
+static const float4 offset_array[vnum] =
+{
+	float4(-0.5f,-0.5f,0,0),//左下
+	float4(-0.5f,+0.5f,0,0),//左上
+	float4(+0.5f,-0.5f,0,0),//右下
+	float4(+0.5f,+0.5f,0,0),//右上
+};
+static const float2 uv_array[vnum] =
+{
+	float2(0,1),//左下
+	float2(0,0),//左上
+	float2(1,1),//右下
+	float2(1,0),//右上
+};
+
+[maxvertexcount(vnum)]
 void main(
-	point VSOutput input[1] : SV_POSITION, 
+	point VSOutput input[1] : SV_POSITION,
 
 	inout TriangleStream< GSOutput > output
-//	inout PointStream< GSOutput > output
-//	inout LineStream< GSOutput > output
+
 )
 {
 	GSOutput element;
-//	for (uint i = 0; i < 3; i++)
-//	{
-	element.normal = input[0].normal;
-	element.uv = input[0].uv;
+	for (uint i = 0; i < vnum; i++)
+	{
+		element.svpos = input[0].pos + offset_array[i];
 
-	element.svpos = input[0].svpos;
-	output.Append(element);
-	
-	element.svpos = input[0].svpos+float4(10.0f,10.0f,0,0);
-	output.Append(element);
-
-	element.svpos = input[0].svpos + float4(10.0f, 0, 0, 0);
-	output.Append(element);
+		element.svpos = mul(mat, element.svpos);
+		//element.uv = float2(0.5f, 0.5f);
+		element.uv = uv_array[i];
+		output.Append(element);
+	}
+}
 
 //	}
-}
