@@ -4,7 +4,7 @@
 #include <DirectXMath.h>
 #include "Input.h"
 #include "Sprite.h"
-#include "Object3d.h"
+#include "ParticleManager.h"
 #include "DebugText.h"
 
 /// <summary>
@@ -54,13 +54,13 @@ public: // メンバ関数
 private: // メンバ変数
 	DirectXCommon* dxCommon = nullptr;
 	Input* input = nullptr;
-	DebugText debugText;	
+	DebugText debugText;
 
 	/// <summary>
 	/// ゲームシーン用
 	/// </summary>
 	Sprite* spriteBG = nullptr;
-	Object3d* object3d = nullptr;
+	ParticleManager* ParticleMan = nullptr;
 
 	//Sprite* sprite1 = nullptr;
 	//Sprite* sprite2 = nullptr;

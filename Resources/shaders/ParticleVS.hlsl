@@ -1,4 +1,4 @@
-#include "BasicShaderHeader.hlsli"
+#include "Particle.hlsli"
 
 VSOutput main(float4 pos : POSITION)
 {

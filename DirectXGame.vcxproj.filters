@@ -30,7 +30,7 @@
     <ClCompile Include="Input.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Object3d.cpp">
+    <ClCompile Include="ParticleManager.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="WinApp.cpp">
@@ -44,10 +44,10 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="Resources\shaders\BasicPixelShader.hlsl">
+    <FxCompile Include="Resources\shaders\ParticlePS.hlsl">
       <Filter>シェーダー ファイル</Filter>
     </FxCompile>
-    <FxCompile Include="Resources\shaders\BasicVertexShader.hlsl">
+    <FxCompile Include="Resources\shaders\ParticleVS.hlsl">
       <Filter>シェーダー ファイル</Filter>
     </FxCompile>
     <FxCompile Include="Resources\shaders\SpritePixelShader.hlsl">
@@ -56,7 +56,7 @@
     <FxCompile Include="Resources\shaders\SpriteVertexShader.hlsl">
       <Filter>シェーダー ファイル</Filter>
     </FxCompile>
-    <FxCompile Include="Resources\shaders\BasicGeometryShader.hlsl">
+    <FxCompile Include="Resources\shaders\ParticleGS.hlsl">
       <Filter>シェーダー ファイル</Filter>
     </FxCompile>
   </ItemGroup>
@@ -64,7 +64,7 @@
     <None Include="Resources\shaders\SpriteShaderHeader.hlsli">
       <Filter>シェーダー ファイル</Filter>
     </None>
-    <None Include="Resources\shaders\BasicShaderHeader.hlsli">
+    <None Include="Resources\shaders\Particle.hlsli">
       <Filter>シェーダー ファイル</Filter>
     </None>
   </ItemGroup>
@@ -78,7 +78,7 @@
     <ClInclude Include="Input.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Object3d.h">
+    <ClInclude Include="ParticleManager.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="WinApp.h">

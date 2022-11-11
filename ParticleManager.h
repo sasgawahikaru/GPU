@@ -9,7 +9,7 @@
 /// <summary>
 /// 3Dオブジェクト
 /// </summary>
-class Object3d
+class ParticleManager
 {
 private: // エイリアス
 	// Microsoft::WRL::を省略
@@ -38,8 +38,9 @@ public: // サブクラス
 	// 定数バッファ用データ構造体
 	struct ConstBufferData
 	{
-//		XMFLOAT4 color;	// 色 (RGBA)
+		//		XMFLOAT4 color;	// 色 (RGBA)
 		XMMATRIX mat;	// ３Ｄ変換行列
+		XMMATRIX matBillboard;
 	};
 
 private: // 定数
@@ -47,7 +48,7 @@ private: // 定数
 	static const float radius;				// 底面の半径
 	static const float prizmHeight;			// 柱の高さ
 	static const int planeCount = division * 2 + division * 2;		// 面の数
-	static const int vertexCount = 1;		// 頂点数
+	static const int vertexCount = 30;		// 頂点数
 //	static const int indexCount = 3*2;		// インデックス数
 
 public: // 静的メンバ関数
@@ -74,7 +75,7 @@ public: // 静的メンバ関数
 	/// 3Dオブジェクト生成
 	/// </summary>
 	/// <returns></returns>
-	static Object3d* Create();
+	static ParticleManager* Create();
 
 	/// <summary>
 	/// 視点座標の取得
@@ -104,7 +105,7 @@ public: // 静的メンバ関数
 	/// ベクトルによる移動
 	/// </summary>
 	/// <param name="move">移動量</param>
-	//static void CameraMoveVector(XMFLOAT3 move);
+	static void CameraMoveVector(XMFLOAT3 move);
 
 	/// <summary>
 	/// ベクトルによる視点移動
@@ -204,28 +205,28 @@ public: // メンバ関数
 	/// 座標の取得
 	/// </summary>
 	/// <returns>座標</returns>
-	const XMFLOAT3& GetPosition() const { return position; }
+//	const XMFLOAT3& GetPosition() const { return position; }
 
 	/// <summary>
 	/// 座標の設定
 	/// </summary>
 	/// <param name="position">座標</param>
-	void SetPosition(const XMFLOAT3& position) { this->position = position; }
+//	void SetPosition(const XMFLOAT3& position) { this->position = position; }
 
 private: // メンバ変数
 	ComPtr<ID3D12Resource> constBuff; // 定数バッファ
 	// 色
-	XMFLOAT4 color = { 1,1,1,1 };
+//	XMFLOAT4 color = { 1,1,1,1 };
 	// ローカルスケール
 	XMFLOAT3 scale = { 1,1,1 };
 	// X,Y,Z軸回りのローカル回転角
-	XMFLOAT3 rotation = { 0,0,0 };
+//	XMFLOAT3 rotation = { 0,0,0 };
 	// ローカル座標
-	XMFLOAT3 position = { 0,0,0 };
+//	XMFLOAT3 position = { 0,0,0 };
 	// ローカルワールド変換行列
-	XMMATRIX matWorld;
+//	XMMATRIX matWorld;
 	// 親オブジェクト
-	Object3d* parent = nullptr;
+//	ParticleManager* parent = nullptr;
 	static XMMATRIX matBillboard;
 	static XMMATRIX matBillboardY;
 };
