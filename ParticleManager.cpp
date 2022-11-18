@@ -280,16 +280,11 @@ void ParticleManager::InitializeGraphicsPipeline()
 			D3D12_APPEND_ALIGNED_ELEMENT,
 			D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0
 		},
-		//{ // 法線ベクトル(1行で書いたほうが見やすい)
-		//	"NORMAL", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0,
-		//	D3D12_APPEND_ALIGNED_ELEMENT,
-		//	D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0
-		//},
-		//{ // uv座標(1行で書いたほうが見やすい)
-		//	"TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0,
-		//	D3D12_APPEND_ALIGNED_ELEMENT,
-		//	D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0
-		//},
+		{
+			"TEXCOORD",0,DXGI_FORMAT_R32_FLOAT,0,
+			D3D12_APPEND_ALIGNED_ELEMENT,
+			D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA,0
+		},
 	};
 
 	// グラフィックスパイプラインの流れを設定
@@ -375,7 +370,8 @@ void ParticleManager::InitializeGraphicsPipeline()
 
 }
 
-void ParticleManager::Add(int life, XMFLOAT3 position, XMFLOAT3 velocity, XMFLOAT3 accel)
+void ParticleManager::Add(int life, XMFLOAT3 position, XMFLOAT3 velocity, XMFLOAT3 accel,
+	float start_scale, float end_scale)
 {
 	particles.emplace_front();
 	Particle& p = particles.front();
@@ -663,6 +659,12 @@ void ParticleManager::Update()
 		it->frame++;
 		it->velocity = it->velocity + it->accel;
 		it->position = it->position + it->velocity;
+
+		float f = (float)it->frame / it->num_frame;
+
+		it->scale = (it->e_scale - it->s_scale) * f;
+		it->scale += it->s_scale;
+
 	}
 	//頂点バッファへデータ転送
 	VertexPos* vertMap = nullptr;
@@ -673,12 +675,12 @@ void ParticleManager::Update()
 			it++)
 		{
 			vertMap->pos = it->position;
-
+			vertMap->scale = it->scale;
 			vertMap++;
+
 		}
 		vertBuff->Unmap(0, nullptr);
-	}
-
+	} 
 	// スケール、回転、平行移動行列の計算
 	//matScale = XMMatrixScaling(scale.x, scale.y, scale.z);
 	//matRot = XMMatrixIdentity();

@@ -8,6 +8,7 @@ cbuffer cbuff0 : register(b0)
 struct VSOutput
 {
 	float4 pos : POSITION; // システム用頂点座標
+	float scale : TEXCOORD;
 };
 struct GSOutput
 {

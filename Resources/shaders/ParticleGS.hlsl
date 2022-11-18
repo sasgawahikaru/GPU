@@ -22,18 +22,20 @@ static const float2 uv_array[vnum] =
 };
 
 [maxvertexcount(vnum)]
-void main(
-	point VSOutput input[1] : SV_POSITION,
-
+void main
+(	point VSOutput input[1] : SV_POSITION,
 	inout TriangleStream< GSOutput > output
-
 )
 {
 	GSOutput element;
 	for (uint i = 0; i < vnum; i++)
 	{
 
-		float4 offset = mul(matBillboard, offset_array[i]);
+		float4// offset = mul(matBillboard, offset_array[i]);
+		offset = offset_Array[i] * input[0].scale;
+
+		offset = mul(matBillboard, offset);
+
 		element.svpos = input[0].pos + offset;
 
 		element.svpos = mul(mat, element.svpos);

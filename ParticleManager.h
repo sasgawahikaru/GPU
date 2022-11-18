@@ -12,6 +12,7 @@
 /// </summary>
 class ParticleManager
 {
+
 private: // エイリアス
 	// Microsoft::WRL::を省略
 	template <class T> using ComPtr = Microsoft::WRL::ComPtr<T>;
@@ -29,6 +30,7 @@ public: // サブクラス
 	//	XMFLOAT3 normal; // 法線ベクトル
 	//	XMFLOAT2 uv;  // uv座標
 	//};
+
 	struct Particle
 	{
 		using XMFLOAT3 = DirectX::XMFLOAT3;
@@ -42,12 +44,17 @@ public: // サブクラス
 		int frame = 0;
 
 		int num_frame = 0;
+
+		float scale = 1.0f;
+		float s_scale = 1.0f;
+		float e_scale = 0.0f;
 	};
 	std::forward_list<Particle> particles;
 	//頂点データ構造体
 	struct VertexPos
 	{
 		XMFLOAT3 pos;
+		float scale;
 	};
 
 	// 定数バッファ用データ構造体
@@ -128,7 +135,8 @@ public: // 静的メンバ関数
 	/// <param name="move">移動量</param>
 	static void CameraMoveEyeVector(XMFLOAT3 move);
 
-	void Add(int life, XMFLOAT3 position, XMFLOAT3 velocity, XMFLOAT3 accel);
+	void Add(int life, XMFLOAT3 position, XMFLOAT3 velocity, XMFLOAT3 accel,
+		float start_scale, float end_scale);
 
 private: // 静的メンバ変数
 	// デバイス

@@ -39,7 +39,26 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input)
 	ParticleMan = ParticleManager::Create();
 	ParticleMan->Update();
 
-	
+	for (int i = 0; i < 100; i++) {
+		const float md_pos = 10.0f;
+		XMFLOAT3 pos{};
+		pos.x = (float)rand() / RAND_MAX * md_pos - md_pos / 2.0f;
+		pos.y = (float)rand() / RAND_MAX * md_pos - md_pos / 2.0f;
+		pos.z = (float)rand() / RAND_MAX * md_pos - md_pos / 2.0f;
+
+		const float md_vel = 0.1f;
+		XMFLOAT3 vel{};
+		vel.x = (float)rand() / RAND_MAX * md_pos - md_pos / 2.0f;
+		vel.y = (float)rand() / RAND_MAX * md_pos - md_pos / 2.0f;
+		vel.z = (float)rand() / RAND_MAX * md_pos - md_pos / 2.0f;
+
+		XMFLOAT3 acc{};
+		const float md_acc = 0.001f;
+		acc.y - (float)rand() / RAND_MAX * md_acc;
+
+		ParticleMan->Add(60, pos, vel, acc, 1.0f, 0.0f);
+	}
+
 	//Sprite::LoadTexture(2, L"Resources/texture.png");
 
 //	sprite1 = Sprite::Create(2, { 0,0 });
@@ -84,27 +103,26 @@ void GameScene::Update()
 	//	position.x += 1.0f;
 	//	sprite1->SetPosition(position);
 	//}
-	for (int i = 0; i < 100; i++) {
-		const float md_pos = 10.0f;
-		XMFLOAT3 pos{};
-		pos.x = (float)rand() / RAND_MAX * md_pos - md_pos / 2.0f;
-		pos.y = (float)rand() / RAND_MAX * md_pos - md_pos / 2.0f;
-		pos.z = (float)rand() / RAND_MAX * md_pos - md_pos / 2.0f;
+	//for (int i = 0; i < 100; i++) {
+	//	const float md_pos = 10.0f;
+	//	XMFLOAT3 pos{};
+	//	pos.x = (float)rand() / RAND_MAX * md_pos - md_pos / 2.0f;
+	//	pos.y = (float)rand() / RAND_MAX * md_pos - md_pos / 2.0f;
+	//	pos.z = (float)rand() / RAND_MAX * md_pos - md_pos / 2.0f;
 
-		const float md_vel = 0.1f;
-		XMFLOAT3 vel{};
-		vel.x = (float)rand() / RAND_MAX * md_pos - md_pos / 2.0f;
-		vel.y = (float)rand() / RAND_MAX * md_pos - md_pos / 2.0f;
-		vel.z = (float)rand() / RAND_MAX * md_pos - md_pos / 2.0f;
+	//	const float md_vel = 0.1f;
+	//	XMFLOAT3 vel{};
+	//	vel.x = (float)rand() / RAND_MAX * md_pos - md_pos / 2.0f;
+	//	vel.y = (float)rand() / RAND_MAX * md_pos - md_pos / 2.0f;
+	//	vel.z = (float)rand() / RAND_MAX * md_pos - md_pos / 2.0f;
 
-		XMFLOAT3 acc{};
-		const float md_acc = 0.001f;
-		acc.y - (float)rand() / RAND_MAX * md_acc;
+	//	XMFLOAT3 acc{};
+	//	const float md_acc = 0.001f;
+	//	acc.y - (float)rand() / RAND_MAX * md_acc;
 
-		ParticleMan->Add(60, pos, vel, acc);
-	}
-
-	ParticleMan->Update();
+	//	ParticleMan->Add(60, pos, vel, acc, 1.0f, 0.0f);
+	//}
+	//ParticleMan->Update();
 }
 
 void GameScene::Draw()
