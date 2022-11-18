@@ -48,13 +48,13 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input)
 
 		const float md_vel = 0.1f;
 		XMFLOAT3 vel{};
-		vel.x = (float)rand() / RAND_MAX * md_pos - md_pos / 2.0f;
-		vel.y = (float)rand() / RAND_MAX * md_pos - md_pos / 2.0f;
-		vel.z = (float)rand() / RAND_MAX * md_pos - md_pos / 2.0f;
+		vel.x = (float)rand() / RAND_MAX * md_vel - md_vel / 2.0f;
+		vel.y = (float)rand() / RAND_MAX * md_vel - md_vel / 2.0f;
+		vel.z = (float)rand() / RAND_MAX * md_vel - md_vel / 2.0f;
 
 		XMFLOAT3 acc{};
 		const float md_acc = 0.001f;
-		acc.y - (float)rand() / RAND_MAX * md_acc;
+		acc.y = -(float)rand() / RAND_MAX * md_acc;
 
 		ParticleMan->Add(60, pos, vel, acc, 1.0f, 0.0f);
 	}
@@ -112,9 +112,9 @@ void GameScene::Update()
 
 	//	const float md_vel = 0.1f;
 	//	XMFLOAT3 vel{};
-	//	vel.x = (float)rand() / RAND_MAX * md_pos - md_pos / 2.0f;
-	//	vel.y = (float)rand() / RAND_MAX * md_pos - md_pos / 2.0f;
-	//	vel.z = (float)rand() / RAND_MAX * md_pos - md_pos / 2.0f;
+	//	vel.x = (float)rand() / RAND_MAX * md_vel - md_vel / 2.0f;
+	//	vel.y = (float)rand() / RAND_MAX * md_vel - md_vel / 2.0f;
+	//	vel.z = (float)rand() / RAND_MAX * md_vel - md_vel / 2.0f;
 
 	//	XMFLOAT3 acc{};
 	//	const float md_acc = 0.001f;

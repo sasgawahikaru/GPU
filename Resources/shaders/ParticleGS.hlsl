@@ -32,7 +32,7 @@ void main
 	{
 
 		float4// offset = mul(matBillboard, offset_array[i]);
-		offset = offset_Array[i] * input[0].scale;
+		offset = offset_array[i] * input[0].scale;
 
 		offset = mul(matBillboard, offset);
 
