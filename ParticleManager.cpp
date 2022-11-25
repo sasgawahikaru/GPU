@@ -43,6 +43,7 @@ const DirectX::XMFLOAT3 operator+(const DirectX::XMFLOAT3& lhs, const DirectX::X
 	result.x = lhs.x + rhs.x;
 	result.y = lhs.y + rhs.y;
 	result.z = lhs.z + rhs.z;
+
 	return result;
 }
 
@@ -280,10 +281,20 @@ void ParticleManager::InitializeGraphicsPipeline()
 			D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0
 		},
 		{
-			"TEXCOORD",0,DXGI_FORMAT_R32_FLOAT,0,
+			"TEXCOORD", 0, DXGI_FORMAT_R32_FLOAT, 0,
 			D3D12_APPEND_ALIGNED_ELEMENT,
-			D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA,0
+			D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0
 		},
+		//{ // 法線ベクトル(1行で書いたほうが見やすい)
+		//	"NORMAL", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0,
+		//	D3D12_APPEND_ALIGNED_ELEMENT,
+		//	D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0
+		//},
+		//{ // uv座標(1行で書いたほうが見やすい)
+		//	"TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0,
+		//	D3D12_APPEND_ALIGNED_ELEMENT,
+		//	D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0
+		//},
 	};
 
 	// グラフィックスパイプラインの流れを設定
@@ -310,6 +321,10 @@ void ParticleManager::InitializeGraphicsPipeline()
 	blenddesc.BlendOp = D3D12_BLEND_OP_ADD;
 	blenddesc.SrcBlend = D3D12_BLEND_ONE;
 	blenddesc.DestBlend = D3D12_BLEND_ONE;
+
+	//blenddesc.BlendOp = D3D12_BLEND_OP_REV_SUBTRACT;
+	//blenddesc.SrcBlend = D3D12_BLEND_ONE;
+	//blenddesc.DestBlend = D3D12_BLEND_ONE;
 
 	//減算
 	//blenddesc.BlendOp = D3D12_BLEND_OP_REV_SUBTRACT;
@@ -663,7 +678,6 @@ void ParticleManager::Update()
 
 		it->scale = (it->e_scale - it->s_scale) * f;
 		it->scale += it->s_scale;
-
 	}
 	//頂点バッファへデータ転送
 	VertexPos* vertMap = nullptr;
@@ -676,10 +690,10 @@ void ParticleManager::Update()
 			vertMap->pos = it->position;
 			vertMap->scale = it->scale;
 			vertMap++;
-
 		}
 		vertBuff->Unmap(0, nullptr);
-	} 
+	}
+
 	// スケール、回転、平行移動行列の計算
 	//matScale = XMMatrixScaling(scale.x, scale.y, scale.z);
 	//matRot = XMMatrixIdentity();
@@ -737,3 +751,4 @@ void ParticleManager::Draw()
 	cmdList->DrawInstanced((UINT)std::distance(particles.begin(), particles.end()), 1, 0, 0);
 	//	cmdList->DrawIndexedInstanced(3, 1, 0, 0, 0);
 }
+

@@ -12,7 +12,6 @@
 /// </summary>
 class ParticleManager
 {
-
 private: // エイリアス
 	// Microsoft::WRL::を省略
 	template <class T> using ComPtr = Microsoft::WRL::ComPtr<T>;
@@ -30,7 +29,6 @@ public: // サブクラス
 	//	XMFLOAT3 normal; // 法線ベクトル
 	//	XMFLOAT2 uv;  // uv座標
 	//};
-
 	struct Particle
 	{
 		using XMFLOAT3 = DirectX::XMFLOAT3;
@@ -71,6 +69,7 @@ private: // 定数
 	static const float prizmHeight;			// 柱の高さ
 	static const int planeCount = division * 2 + division * 2;		// 面の数
 	static const int vertexCount = 1024;		// 頂点数
+
 //	static const int indexCount = 3*2;		// インデックス数
 
 public: // 静的メンバ関数
@@ -255,4 +254,3 @@ private: // メンバ変数
 	static XMMATRIX matBillboard;
 	static XMMATRIX matBillboardY;
 };
-
